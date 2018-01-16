@@ -9,24 +9,11 @@ export default GithubSerializer.extend({
   },
 
   normalize(modelClass, resourceHash, prop) {
-    let normalizedHash = {
-      id: resourceHash.recordId || resourceHash.login,
-      login: resourceHash.login,
-      name: resourceHash.name,
-      type: resourceHash.type,
-      avatarUrl: resourceHash.avatar_url,
-      htmlUrl: resourceHash.html_url,
-      publicRepos: resourceHash.public_repos,
-      publicGists: resourceHash.public_gists,
-      followers: resourceHash.followers,
-      following: resourceHash.following,
-      createdAt: resourceHash.created_at,
-      updatedAt: resourceHash.updated_at,
-      url: resourceHash.url,
-      links: {
-        githubRepositories: resourceHash.repos_url
-      }
-    };
-    return this._super(modelClass, normalizedHash, prop);
+    resourceHash.id = resourceHash.recordId || resourceHash.login
+    resourceHash.links = {
+      githubRepositories: resourceHash.repos_url
+    }
+    debugger
+    return this._super(modelClass, resourceHash, prop);
   }
 });
